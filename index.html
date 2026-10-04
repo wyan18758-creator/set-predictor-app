@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SET Predictor</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111827">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111827;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 12px;
+    }
+    .card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 20px; margin: 4px 0 12px; }
+    h2 { font-size: 16px; margin: 0 0 8px; }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin: 4px 0;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background: #111827;
+      color: #fff;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 14px;
+      margin: 4px 4px 4px 0;
+      border: 0;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 15px;
+    }
+    button.alt { background: #374151; }
+    .big { font-size: 30px; font-weight: bold; letter-spacing: 6px; }
+    .muted { color: #9ca3af; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    td, th { padding: 4px; border-bottom: 1px solid #374151; text-align: left; }
+    .bar { height: 8px; background: #2563eb; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>SET Predictor <span class="muted">v0.1</span></h1>
+
+  <div class="card">
+    <div id="clock" class="muted"></div>
+    <h2 id="sess"></h2>
+    <div id="countdown"></div>
+  </div>
+
+  <div class="card">
+    <h2>Live snapshot</h2>
+    <input id="inSet" type="number" step="0.01" inputmode="decimal" placeholder="SET (e.g. 1245.38)">
+    <input id="inVal" type="number" step="0.001" inputmode="decimal" placeholder="Value (e.g. 31.900)">
+    <button onclick="addManual()">Snapshot သိမ်း</button>
+    <div id="snapInfo" class="muted"></div>
+    <input id="inWorker" placeholder="Worker URL (နောက်မှထည့်)">
+    <button class="alt" onclick="saveWorker()">URL သိမ်း</button>
+    <span id="pollStat" class="muted"></span>
+  </div>
+
+  <div class="card">
+    <h2>Prediction</h2>
+    <button onclick="runPredict()">Predict</button>
+    <div id="pred"></div>
+  </div>
+
+  <div class="card">
+    <h2>Actual result</h2>
+    <input id="acSet" type="number" step="0.01" inputmode="decimal" placeholder="Actual SET">
+    <input id="acVal" type="number" step="0.001" inputmode="decimal" placeholder="Actual Value">
+    <button onclick="saveActual()">Result သိမ်း</button>
+    <div id="stats"></div>
+  </div>
+
+  <div class="card">
+    <h2>Backup</h2>
+    <button class="alt" onclick="exportData()">Export JSON</button>
+    <input type="file" id="imp" accept=".json" onchange="importData(this)">
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
